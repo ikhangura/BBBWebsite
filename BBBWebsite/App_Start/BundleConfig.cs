@@ -19,20 +19,36 @@ namespace BBBWebsite
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            //bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-            //          "~/Scripts/bootstrap.js",
-            //          "~/Scripts/respond.js"));
+            /*Bootstrap*/
+            /*
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/respond.js"));
 
-            //bundles.Add(new StyleBundle("~/Content/css").Include(
-            //          "~/Content/bootstrap.css",
-            //          "~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bootstrap.css",
+                      "~/Content/site.css"));
+             */
 
+            /*Foundation*/
+            /*
             bundles.Add(new ScriptBundle("~/bundles/foundation").Include(
-          "~/Scripts/foundation/foundation.min.js",
-          "~/Scripts/respond.js"));
+                      "~/Scripts/foundation/foundation.min.js",
+                      "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/foundation/foundation.css",
+                      "~/Content/site.css"));
+            */
+
+            /*MaterializeCSS*/
+            bundles.Add(new ScriptBundle("~/bundles/materialize").Include(
+                      "~/Scripts/materialize.js",
+                      "~/Scripts/respond.js",
+                      "~/Scripts/init.js"));
+
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/materialize.min.css",
                       "~/Content/site.css"));
         }
     }

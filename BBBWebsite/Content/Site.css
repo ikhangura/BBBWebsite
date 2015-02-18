@@ -1,24 +1,44 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
+﻿.card {
+   }
+  .card .card-title {
+        color: #FFF;
+        font-size: 24px;
+        font-weight: 300; }
+  .card .card-subtitle {
+        color: #7f8c8d;
+        font-size: 12px;
+        font-weight: 200; }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
+  .card.profile {
+        height: auto; }
+    .card.profile.card-title {
+        
+    }
+    .card.profile .card-subtitle {
+        color: #FFF;
+        font-size: 14px;
+        font-weight: 300;
+    }
+    .card.profile .card-image {
+        height: 150px; }
+    .card.profile .card-image .card-title {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding-bottom: 50px; }
+    .card.profile .card-image .card-subtitle {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 20px;
+        padding-bottom: 10px;
+    }
+    .card.profile .card-content {
+        height: auto; }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
+.collection {
+  border: none; }
+  .collection .collection-item {
+    border-bottom: none; }
+  .collection.with-header .collection-header {
+    border-bottom: none;}

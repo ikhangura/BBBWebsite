@@ -2,56 +2,57 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>@ViewBag.Title - BCIT Blurb Board</title>
+    <!--Import materialize.css-->
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
-    <div class="fixed">
-        <nav class="top-bar" data-topbar role="navigation">
-            <ul class="title-area">
-                <li class="name">
-                    <h1><a href="/">BCIT Blurb Board</a></h1>
-                </li>
-                <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-            </ul>
-            <section class="top-bar-section">
-                <!-- Right Nav Section -->
-                <ul class="right">
-                    <li class="active"><a href="#">Right Button Active</a></li>
-                    <li class="has-dropdown">
-                        <a href="#">Right Button Dropdown</a>
-                        <ul class="dropdown">
-                            <li><a href="#">First link in dropdown</a></li>
-                            <li class="active"><a href="#">Active link in dropdown</a></li>
-                        </ul>
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper">
+        <div class="row">
+            <div class="col m1 l1"><span>&nbsp;</span></div>
+            <div class="col s12 m10 l10">
+
+                @*Logo*@
+                <a href="/" class="brand-logo">BCIT Blurb Board</a>
+
+                @*Search*@
+                @*<ul class="right hide-on-med-and-down">
+                    <li class="input-field">
+                        <input id="search" type="text" required>
+                        <label for="search"><i class="mdi-action-search"></i></label>
                     </li>
-                    <li>
-                        @Html.ActionLink("Logout", "Index", "Logout")
-                    </li>
+                </ul>*@
+
+                @*Tablet and Desktop nav*@
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="#!"><i class="mdi-social-group"></i></a></li>
+                    <li><a href="#!"><i class="mdi-communication-message"></i></a></li>
+                    <li><a href="#!"><i class="mdi-action-exit-to-app"></i></a></li>
                 </ul>
 
-                <!-- Left Nav Section -->
-                <ul class="left">
-                    <li><a href="#">Left Nav Button</a></li>
+                @*Mobile nav*@
+                <ul id="slide-out" class="side-nav">
+                    <li><a href="#!">Contacts</a></li>
+                    <li><a href="#!">Announce</a></li>
+                    <li><a href="#!">Logout</a></li>
                 </ul>
-            </section>
-        </nav>
+                <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            </div>
+            <div class="col m1 l1"><span>&nbsp;</span></div>
+        </div>
     </div>
+</nav>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+@RenderBody()
 
+<!--Import jQuery before materialize.js-->
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/foundation")
+    @Scripts.Render("~/bundles/materialize")
     @RenderSection("scripts", required: false)
 </body>
 </html>
