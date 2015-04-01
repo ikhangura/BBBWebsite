@@ -6,24 +6,34 @@
         $routeProvider
           .when("/login", {
               templateUrl: "/login/loginView.html",
-              controller: "loginController"
+              controller: "loginController",
+              title: "Login"
           })
         .when("/contacts", {
             templateUrl: "/contacts/contactsView.html",
-            controller: "contactsController"
+            controller: "contactsController",
+            title: "Contacts"
         })
         .when("/mycourses", {
             templateUrl: "/mycourses/mycoursesView.html",
-            controller: "mycoursesController"
+            controller: "mycoursesController",
+            title: "Courses"
         })
         .when("/newsfeed", {
             templateUrl: "/newsfeed/newsfeedView.html",
-            controller: "newsfeedController"
+            controller: "newsfeedController",
+            title: "Newsfeed"
         })
         .otherwise({
             redirectTo: "/login"
         });
 
     });
+
+    app.controller('AppCtrl', ['$scope', function ($scope) {
+        $scope.$on('$routeChangeSuccess', function (event, data) {
+            $scope.pageTitle = data.title;
+        });
+    }]);
 
 }());
