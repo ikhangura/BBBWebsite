@@ -1,24 +1,72 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html ng-app="myApp" ng-controller="AppCtrl" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-    <title>Angular BCIT Blurb Board</title>
+    <title>{{pageTitle}} | BCIT Blurb Board</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="Content/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="Content/Site.css">
+
+    <!--Javascript-->
+    <script src="Scripts/materialize.min.js"></script>
+    <script src="Scripts/init.js"></script>
+
 </head>
-<body ng-app="myApp">
 
-    <h3> This Is The Header Section of the Main "Layout"</h3>
+<body>
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper">
+            <div class="row">
+                <div class="col m1 l1"><span>&nbsp;</span></div>
+                <div class="col s12 m10 l10">
+                    <!--Logo-->
+                    <a href="/" class="brand-logo">BCIT Blurb Board</a>
+                    <!--Search-->
+                    <!--<ul class="right hide-on-med-and-down">
+                        <li class="input-field">
+                            <input id="search" type="text" required>
+                            <label for="search"><i class="mdi-action-search"></i></label>
+                        </li>
+                    </ul>-->
+                    <!--Tablet and Desktop nav-->
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="#!"><i class="mdi-social-group"></i></a></li>
+                        <li><a href="#!"><i class="mdi-communication-message"></i></a></li>
+                        <li><a href="#!"><i class="mdi-action-exit-to-app"></i></a></li>
+                    </ul>
+                    <!--Mobile nav-->
+                    <ul id="slide-out" class="side-nav">
+                        <li><a href="#!">Contacts</a></li>
+                        <li><a href="#!">Announce</a></li>
+                        <li><a href="#!">Logout</a></li>
+                    </ul>
+                    <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+                </div>
+                <div class="col m1 l1"><span>&nbsp;</span></div>
+            </div>
+        </div>
+    </nav>
 
-    <div ng-view></div>
-
-
-    <h4> This Is The Footer Seciton of the Main "Layout"</h4>
-
-
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <div ng-view></div>
+            </div>
+        </div>
+        <br><br>
+        <div class="section">
+        </div>
+    </div>
 
 </body>
+
 </html>
+
 <!-- Dependencies -->
 <script src="Scripts/angular.min.js"></script>
 <script src="Scripts/angular-route.min.js"></script>
+
 <!-- Routing -->
 <script src="routes.js"></script>
 
