@@ -1,37 +1,31 @@
-﻿<div ng-controller="loginController">
-    <h3>Login</h3>
+﻿
+    <div ng-show="!formLoading" class="animate-show">
+        <h3>Login</h3>
+    </div>
     <div class="row">
-        <form class="col s12" name="loginForm">
-            <div class="row">
-                <div class="input-field col s6">
-                    <input placeholder="Email" id="email" type="email" class="validate" ng-model="loginForm.email" required>
-                    <label for="email">Email</label>
+        <div ng-show="formLoading" class="animate-show">
+            <img src="../img/loading-circle.gif" />
+        </div>
+        <div ng-show="!formLoading" class="animate-show">
+            <form class="col s12" name="loginForm">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="Email" id="email" type="email" class="validate" ng-model="loginForm.email" required>
+                        <label for="email">Email</label>
+                    </div>
                 </div>
-            </div>
                 <div class="row">
                     <div class="input-field col s6">
                         <input id="password" type="password" class="validate" ng-model="loginForm.password" required>
                         <label for="password">Password</label>
                     </div>
                 </div>
-        
-            <button class="btn waves-effect waves-light" style="background-color:#2386AE" ng-click="attemptLogin()">
-                Submit
-                <i class="mdi-content-send right"></i>
-            </button>
 
-            <!--<div class="row">
-                <div class="input-field col s12">
-                    <input id="password" type="password" class="validate">
-                    <label for="password">Password</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="email" type="email" class="validate">
-                    <label for="email">Email</label>
-                </div>
-            </div>-->
-        </form>
+                <button class="btn waves-effect waves-light" style="background-color:#2386AE" ng-click="attemptLogin()">
+                    Submit
+                    <i class="mdi-content-send right"></i>
+                </button>
+            </form>
+        </div>
+        
     </div>
-</div>
