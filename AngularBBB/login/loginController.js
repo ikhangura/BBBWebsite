@@ -5,49 +5,35 @@
     var loginController = function ($scope, $http, $cookies, $location) {
         //interactive functionality code goes here
 
-        console.log("HELLO");
+        console.log("Login - Initializing");
 
         $scope.loginForm = {};
+        $scope.formLoading = false;
 
         var onSuccess = function (response) {
-            console.log("in success response");
-            var token = response.data.data.token;
-            //alert(token);
-
-            var userData = response.data.data;
-
-            //alert(JSON.stringify(response.data.data));
+            console.log('Login - Successful Response From Server');
             saveDataToCookie(response.data.data);
             
-            console.log("about to location");
+            console.log("Login - Redirecting To Newsfeed");
             $location.path('/newsfeed');
-
-            console.log("go here");
-
-
         }
 
         var saveDataToCookie = function (data) {
-            console.log('in function');
             //setup and save cookie data
-            var expiryDate = new Date();
-            expiryDate.setHours(expiryDate.getHours() + 2);
-
-            console.log('setting options');
-            var options = { 'expires': expiryDate };
-
-            console.log('saving cookie');
+            console.log('Login - Saving Data To Cookie');
             $cookies.userData = JSON.stringify(data);
         }
 
         var onFailure = function (response) {
-            console.log("in failure response");
+            console.log('Login - Error From Server / Failure To Send');
+            $scope.formLoading = false;
             alert(JSON.stringify(response));
         }
 
 
         $scope.attemptLogin = function () {
-            console.log("here")
+            console.log('Login - Attempting To Login');
+            $scope.formLoading = true;
             var data = $scope.loginForm;
             $http.post("http://api.thunderchicken.ca/api/auth", data)
                 .then(onSuccess, onFailure);

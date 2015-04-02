@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    var app = angular.module("myApp", ["ngRoute", "ngCookies"]);
+    var app = angular.module("myApp", ["ngRoute", "ngCookies", "ngAnimate"]);
 
     app.config(function ($routeProvider) {
         $routeProvider
@@ -35,10 +35,14 @@
 
     });
 
-    app.controller('AppCtrl', ['$scope', function ($scope) {
+    app.controller('AppCtrl', ['$scope', '$cookies', function ($scope, $cookies) {
         $scope.$on('$routeChangeSuccess', function (event, data) {
             $scope.pageTitle = data.title;
         });
+
+        $scope.logout = function () {
+            $cookies.userData = "";
+        }
     }]);
 
 }());
