@@ -7,7 +7,6 @@
 
 
 
-
     }
 
     app.controller("contactsController", ["$scope", contactsController]);

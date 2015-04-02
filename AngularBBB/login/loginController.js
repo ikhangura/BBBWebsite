@@ -37,7 +37,7 @@
             var options = { 'expires': expiryDate };
 
             console.log('saving cookie');
-            $cookies.userData = data;
+            $cookies.userData = JSON.stringify(data);
         }
 
         var onFailure = function (response) {
