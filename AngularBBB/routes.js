@@ -24,6 +24,11 @@
             controller: "newsfeedController",
             title: "Newsfeed"
         })
+        .when("/article/:newsid", {
+            templateUrl: "/article/articleView.html",
+            controller: "articleController",
+            title: "Article"
+        })
         .otherwise({
             redirectTo: "/login"
         });
