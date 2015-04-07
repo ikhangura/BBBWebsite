@@ -42,3 +42,7 @@
     border-bottom: none; }
   .collection.with-header .collection-header {
     border-bottom: none;}
+
+  #expiryRow {
+      display: none;
+  }
