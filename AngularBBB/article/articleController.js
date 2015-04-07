@@ -12,6 +12,7 @@
         var userid = userInfo.userid;
         var userrealname = userInfo.name;
         var baseURL = "http://api.thunderchicken.ca/api/";
+        var lastPage = document.referrer;
 
         var Load = function () {
             var articleURL = baseURL + "newsfeed/" + userid + "/article/" + newsid + "/" + token;
@@ -19,6 +20,7 @@
             .success(function (response) {
                 BindArticle(response.data);
                 BindComments(response.data.comments);
+                $scope.dataloaded = true;
             })
             .error(function (data) {
                 var test = data;
@@ -37,7 +39,20 @@
         }
 
         $scope.PostNewComment = function () {
+            var postcommentURL = baseURL + "newsfeed/" + userid + "/article/" + newsid + "/comment/" + token;
+            var commentobj = new Object();
+            commentobj.content = $scope.newcommenttext;
+            var commentjson = JSON.stringify(commentobj);
 
+            $http.post(postcommentURL, commentjson)
+                .success(function (response) {
+                    $scope.postresponse = response.message;
+                    $scope.newcommenttext = '';
+                    Load();
+                })
+                .error(function (response) {
+                    $scope.postresponse = response.message;
+                });
         };
 
         $scope.GoToTop = function () {
@@ -46,9 +61,10 @@
         }
 
         $scope.NavigateBack = function() {
-            history.back();
+            window.location.replace("#/newsfeed");
         };
 
+        $scope.dataloaded = false;
         Load();
     }
 

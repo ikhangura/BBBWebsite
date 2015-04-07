@@ -1,11 +1,18 @@
 ﻿<div id="top" class="row" ng-controller="articleController">
-    <div class="col s12">
+    <div class="row" ng-show="!dataloaded">
+        <div style="width:70%; height:80%;position:absolute" class="valign-wrapper">
+            <div class="progress col s5 small-offset-2 valign">
+                <div class="indeterminate"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12" ng-show="dataloaded">
         <!--Article Info section-->
         <div class="section">
             <div class="row">
                 <div class="col s12">
                     <button class="btn waves-effect waves-light" style="background-color:#2386AE" ng-click="NavigateBack()">
-                        BACK
+                        BACK                        
                         <i class="mdi-navigation-chevron-left left"></i>
                     </button>
                 </div>
@@ -54,7 +61,11 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s12 right-align">
+                    <div class="col s6">
+                        {{postresponse}}
+                        <br/><!-- Need to reserve space when there is no text-->
+                    </div>
+                    <div class="col s6 small-offset-6 right-align">
                         <button class="btn waves-effect waves-light" style="background-color:#2386AE" ng-click="PostNewComment()">
                             POST
                             <i class="mdi-content-send right"></i>
