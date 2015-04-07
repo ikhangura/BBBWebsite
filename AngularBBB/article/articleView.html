@@ -1,4 +1,79 @@
-﻿<div ng-controller="articleController">
-    <h3>{{newsid}}</h3>
+﻿<div class="row" ng-controller="articleController">
+    <div class="col s12">
+        <!--Article Info section-->
+        <div class="section">
+            <div class="row">
+                <div class="col s12">
+                    <h4 class="center-align">Title{{articletitle}}</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <!--Article text row-->
+                    <div class="row">
+                        <div class="col s12">
+                            <p class="flow-text">{{articletext}}Text</p>
+                        </div>
+                    </div>
+                    <!--Article metadata row-->
+                    <div class="row">
+                        <div class="col s7">
+                            <p class="black-text">{{articleauthor}}Author</p>
+                        </div>
+                        <div class="col s5 right-align">
+                            <p class="black-text">{{articledate}}Date</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <!--Post new comments section-->
+        <div class="section">
+            <div class="row">
+                <div class="col s12">
+                    <h5>Reply:</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <textarea class="materialize-textarea" rows="1" cols="50" spellcheck="true" placeholder="Comment..."></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 right-align">
+                    <button class="btn waves-effect waves-light" style="background-color:#2386AE" ng-click="">
+                        POST
+                        <i class="mdi-content-send right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <!--Comments section-->
+        <div class="section">
+            <div class="col s12">
+                <!--Begin repeating for every comment-->
+                <div class="row">
+                    <div class="row">
+                        <div class="col s12">
+                                {{commenttext}}sample comment
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>
+                                {{commentauthor}}comment author
+                            </p>
+                        </div>
+                        <div class="col s6 right-align">
+                                {{commentdate}}comment date
+                        </div>
+                    </div>
+                </div>
+                <!--End comment-->
+            </div>
+        </div>
+    </div>
 </div>
    
