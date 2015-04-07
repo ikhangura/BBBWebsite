@@ -2,26 +2,55 @@
 
     var app = angular.module("myApp");
 
-    var articleController = function ($scope, $http, $cookie, $routeParams) {
+    var articleController = function ($scope, $http, $cookie, $location, $anchorScroll, $routeParams) {
         //interactive functionality code goes here
-        $scope.newsid = $routeParams.newsid;
 
+        var newsid = $routeParams.newsid;
         var userInfo = JSON.parse($cookie.userData);
         var token = userInfo.token;
         var usertype = userInfo.type;
         var userid = userInfo.userid;
         var userrealname = userInfo.name;
+        var baseURL = "http://api.thunderchicken.ca/api/";
 
-        var loadArticle = function () {
+        var Load = function () {
+            var articleURL = baseURL + "newsfeed/" + userid + "/article/" + newsid + "/" + token;
+            $http.get(articleURL)
+            .success(function (response) {
+                BindArticle(response.data);
+                BindComments(response.data.comments);
+            })
+            .error(function (data) {
+                var test = data;
+            })
+        };
+
+        var BindComments = function (commentsArray) {
+            $scope.comments = commentsArray;
+        };
+
+        var BindArticle = function (data) {
+            $scope.articletitle = data.title;
+            $scope.articleauthor = data.authorname;
+            $scope.articledate = data.datetime;
+            $scope.articletext = data.content;
+        }
+
+        $scope.PostNewComment = function () {
 
         };
 
-        var loadComments = function () {
-
+        $scope.GoToTop = function () {
+            $location.hash('top');
+            $anchorScroll();
         }
 
-        $scope.userinfo = "ID:" + userid + " " + userrealname + " " + usertype + " " + token;
+        $scope.NavigateBack = function() {
+            history.back();
+        };
+
+        Load();
     }
 
-    app.controller("articleController", ["$scope", "$http", "$cookies", "$routeParams", articleController]);
+    app.controller("articleController", ["$scope", "$http", "$cookies", "$location", "$anchorScroll", "$routeParams", articleController]);
 }());
