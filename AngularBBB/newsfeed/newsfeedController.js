@@ -4,7 +4,9 @@
 
     var newsfeedController = function ($scope, $http, $cookie) {
         //interactive functionality code goes here
-        $scope.formLoading = true;
+        $scope.newsfeedLoading = true;
+        $scope.menuLoading = true;
+        $scope.transition = true;
         console.log("Newsfeed - Initializing");
 
 
@@ -13,31 +15,69 @@
         //alert(JSON.stringify(userData));
         var token = userData.token;
         var userid = userData.userid;
+        var name = userData.name;
+        var courses;
 
         console.log("Newsfeed - Successfuly Pulled Cookie Data");
 
+        $scope.username = name;
+
 
         var onSuccess = function (response) {
-            console.log("Newsfeed - Successful Response From Server");
+            $scope.transition = true;
+            console.log("Newsfeed - Successful Response From Server For Newsfeed");
             //console.log("Newsfeed: " + response.data.message);
             //alert(JSON.stringify(response));
             $scope.newsfeed = response.data.data.news;
-            $scope.formLoading = false;
+            $scope.transition = false;
+            $scope.newsfeedLoading = false;
         }
 
         var onFailure = function (response) {
-            console.log("Newsfeed - Failure Response From Server / Error In Sending");
-            alert(JSON.stringify(response));
-            $scope.formLoading = false;
+            console.log("Newsfeed - Failure Response From Server / Error In Sending For Newsfeed");
+            //alert(JSON.stringify(response));
+            $scope.newsfeedLoading = false;
+        }
+
+        var onMenuSuccess = function (response) {
+            console.log("Newsfeed - Success Response From Server For Menu");
+            $scope.programname = response.data.data.programname;
+
+            courses = response.data.data.courses;
+            var coursesArray = response.data.data.courses;
+            var allOption = coursesArray.pop(); //remove the last element
+            $scope.all = allOption.coursesectionid;
+            $scope.courses = coursesArray;
+
+            $scope.menuLoading = false;
+        }
+
+        var onMenuFailure = function (response) {
+            console.log("Newsfeed - Failure Response From Server / Error In Sending For Menu");
+            $scope.menuLoading = false;
         }
 
 
+        $scope.getCourseSpecific = function(coursesectionid){
+            //alert(coursesectionid);
+            if (coursesectionid == 'all') {
+                // call default news fetch
+                $http.get("http://api.thunderchicken.ca/api/newsfeed/" + userid + "/standard/" + token)
+                    .then(onSuccess, onFailure);
+            } else {
+                $http.get("http://api.thunderchicken.ca/api/newsfeed/" + userid + "/coursesection/" + coursesectionid + "/" + token)
+                    .then(onSuccess, onFailure);
+            }
+            
+        }
 
         //get newsfeed data
         $http.get("http://api.thunderchicken.ca/api/newsfeed/" + userid + "/standard/" + token)
             .then(onSuccess, onFailure);
 
-        
+        //get course data
+        $http.get("http://api.thunderchicken.ca/api/mycourses/" + userid + "/" + token)
+            .then(onMenuSuccess, onMenuFailure);
 
 
     }
