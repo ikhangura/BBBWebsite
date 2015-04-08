@@ -40,23 +40,39 @@
 
     });
 
-    app.controller('AppCtrl', ['$scope', '$cookies', function ($scope, $cookies) {
+    app.controller('AppCtrl', ['$scope', '$cookies', '$location', function ($scope, $cookies, $location) {
         $scope.displayLoggedInOptions = false;
 
         $scope.$on('$routeChangeSuccess', function (event, data) {
             $scope.pageTitle = data.title;
+
         });
 
+        // route authorization
+        $scope.$on('$locationChangeStart', function (event, data) {
+            var hashIndex = data.indexOf('#');
+            var path = data.substr(hashIndex + 1);
+
+            if (path != "/login") {
+                if ($cookies.userData == "") {
+                    console.log("Authorization - Unauthorized User Detected");
+                    $location.path('/login');
+                }
+            }
+        });
+
+        //logout functionality
         $scope.logout = function () {
+            console.log("Authorization - User Logged Out / Cookie Cleared");
             $cookies.userData = "";
         }
 
-
+        //menu display authorization
         $scope.$on('$viewContentLoaded', function () {
-            console.log("HERE");
             if ($cookies.userData != "") {
-                console.log("Triggered as logged in");
                 $scope.displayLoggedInOptions = true;
+            } else {
+                $scope.displayLoggedInOptions = false;
             }
         })
     }]);
