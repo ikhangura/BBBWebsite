@@ -9,6 +9,14 @@
 
         $scope.loginForm = {};
         $scope.formLoading = false;
+        $scope.displayNotice = false;
+
+        $http.get("http://api.thunderchicken.ca/api/newsfeed/critical")
+            .success(function (response) {
+                console.log('Login - Loading Critical News Notices');
+                $scope.notices = response.data.criticalnews;
+                $scope.displayNotice = true;
+            });
 
         var onSuccess = function (response) {
             console.log('Login - Successful Response From Server');
@@ -26,17 +34,28 @@
 
         var onFailure = function (response) {
             console.log('Login - Error From Server / Failure To Send');
+            if (response.status == 403) {
+                $scope.errorMessage = "The Username / Password Entered Is Invalid";
+            } else if (response.status == 500) {
+                $scope.errorMessage = "An Error Has Occurred On The Server. Please Refresh The Page and Login Again";
+            } else {
+                $scope.errorMessage = "An Error Has Occurred On The Server. Please select Start Menu > Shutdown, And Have a Nice Day";
+            }
+            //$scope.errorMessage
             $scope.formLoading = false;
-            alert(JSON.stringify(response));
+            //alert(JSON.stringify(response));
         }
 
 
         $scope.attemptLogin = function () {
-            console.log('Login - Attempting To Login');
-            $scope.formLoading = true;
-            var data = $scope.loginForm;
-            $http.post("http://api.thunderchicken.ca/api/auth", data)
-                .then(onSuccess, onFailure);
+            if ($scope.loginForm.$valid) {
+                console.log('Login - Attempting To Login');
+                $scope.formLoading = true;
+                var data = $scope.loginForm;
+                $http.post("http://api.thunderchicken.ca/api/auth", data)
+                    .then(onSuccess, onFailure);
+            }
+            
         }
 
 
