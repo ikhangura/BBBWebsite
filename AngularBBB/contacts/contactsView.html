@@ -2,13 +2,19 @@
     <div class="row" ng-show="!singlecontactselected">
         <!--Begin search bar row-->
         <div class="row">
-            <div class="col s4 offset-s3">
-                <input type="text" ng-model="txtsearch" />
-            </div>
-            <div class="col s5">
-                <a class="waves-effect waves-light btn" style="background-color:#2386AE" ng-click="FilterContacts()"><i class="mdi-action-search right"></i>Search</a>
-                <a class="waves-effect waves-light btn" style="background-color:#2386AE" ng-click="ResetContacts()">Reset</a>
-            </div>
+            <form>
+                <div class="col s4 offset-s3">
+                    <input type="text" ng-model="txtsearch" />
+                </div>
+                <div class="col s5">
+                    <button type="submit" name="action" class="waves-effect waves-light btn"
+                            style="background-color:#2386AE"
+                            ng-click="FilterContacts()">
+                        <i class="mdi-action-search right"></i>Search
+                    </button>
+                    <a class="waves-effect waves-light btn" style="background-color:#2386AE" ng-click="ResetContacts()">Reset</a>
+                </div>
+            </form>
         </div>
         <!--End search bar row-->
         <!--Begin list of contacts section-->
