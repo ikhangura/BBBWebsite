@@ -31,6 +31,7 @@
             $http.get(usercontactURL)
             .success(function (response) {
                 BindSingleContactData(response.data);
+                $scope.singlecontactselected = true;
             })
             .error(function (resposne) {
 
@@ -84,6 +85,11 @@
             $scope.contactdata = allcontacts;
         }
 
+        $scope.ShowContactList = function () {
+            $scope.singlecontactselected = false;
+        };
+
+        $scope.singlecontactselected = false;
         LoadAllContacts();
     }
 
