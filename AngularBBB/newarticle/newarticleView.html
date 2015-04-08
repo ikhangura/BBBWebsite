@@ -1,0 +1,60 @@
+﻿<!-- New Article Form -->
+<!--<div ng-show="formLoading" class="animate-show">
+    <div class="row">
+        <img src="../img/loading-circle.gif" />
+    </div>
+</div>-->
+<div ng-show="!formLoading" class="animate-show">
+    <div ng-include="'/includes/menu.html'"></div>
+    <form class="col s12 m8 l8">
+        <!--Title-->
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="titleField" type="text" length="30">
+                <label for="titleField">Title</label>
+            </div>
+        </div>
+        <!--To-->
+        <div class="row">
+            <div class="input-field col s12">
+                <label>To</label>
+                <select id="toField">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                </select>
+            </div>
+        </div>
+        <!--Critical-->
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="checkbox" id="criticalField" onclick=" provisionExpiry() "/>
+                <label for="criticalField">Critical</label>
+            </div>
+        </div>
+        <!--Expiry-->
+        <div class="row" id="expiryRow">
+            <div class="input-field col s12">
+                <input type="date" class="datepicker" id="expiryField">
+                <label for="expiryField">Expiry</label>
+            </div>
+        </div>
+        <!--Content-->
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea id="contentField" class="materialize-textarea"></textarea>
+                <label for="contentField">Content</label>
+            </div>
+        </div>
+    </form>
+    <script>
+        function provisionExpiry() {
+            if (document.getElementById('criticalField').checked) {
+                document.getElementById('expiryRow').style.display = 'visible';
+            } else {
+                document.getElementById('expiryRow').style.display = 'none';
+            }
+        }
+    </script>
+</div>

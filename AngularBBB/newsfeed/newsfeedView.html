@@ -1,25 +1,35 @@
 ﻿  
 <!--News list-->
-
+<!--
 <div ng-show="formLoading" class="animate-show">
     <div class="row">
         <img src="../img/loading-circle.gif" />
     </div>
+</div>-->
+<div ng-show="newsfeedLoading && menuLoading" class="progress animate-show">
+    <div class="indeterminate"></div>
 </div>
 
-<div ng-show="!formLoading" class="animate-show">
+<div ng-show="!newsfeedLoading && !menuLoading" class="animate-show">
+
+    <div ng-include="'/includes/menu.html'"></div>
+
     <div class="col s12 m8 l8">
-        <div ng-repeat="article in newsfeed">
-            <div class="card small">
-                <div class="card-content">
-                    <a href="#/article/{{article.newsid}}" class="card-title truncate blue-text">{{article.title}}</a>
-                    <div class="card-subtitle ">{{article.author | uppercase}} - {{article.datetime}}</div>
-                    <p>
-                        {{article.content}}
-                    </p>
-                </div>
-                <div class="card-action">
-                    <a class="right" href="#/article/{{article.newsid}}">{{article.numcomments}}</a>
+        <div ng-show="!transition" class="animate-show" model="transition">
+
+
+            <div ng-repeat="article in newsfeed">
+                <div class="card small">
+                    <div class="card-content">
+                        <a href="#/article/{{article.newsid}}" class="card-title truncate blue-text">{{article.title}}</a>
+                        <div class="card-subtitle ">{{article.author | uppercase}} - {{article.datetime}}</div>
+                        <p>
+                            {{article.content}}
+                        </p>
+                    </div>
+                    <div class="card-action">
+                        <a class="right" href="#/article/{{article.newsid}}">{{article.numcomments}}</a>
+                    </div>
                 </div>
             </div>
         </div>
