@@ -5,56 +5,92 @@
     </div>
 </div>-->
 <div ng-show="!formLoading" class="animate-show">
+    
     <div ng-include="'/includes/menu.html'"></div>
+
     <form class="col s12 m8 l8">
-        <!--Title-->
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="titleField" type="text" length="30">
-                <label for="titleField">Title</label>
+
+        <div class="card small" id="newarticleform">
+
+            <div class="card-image orange">
+                <span class="card-title">New Article</span>
+            </div>
+            <div class="card-content">
+                <!--Title-->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="titleField" type="text" length="30">
+                        <label for="titleField">Title</label>
+                    </div>
+                </div>
+                <!--To-->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select>
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                        <label>To</label>
+                    </div>
+                </div>
+                <!--Content-->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="contentField" class="materialize-textarea"></textarea>
+                        <label for="contentField">Content</label>
+                    </div>
+                </div>
+                <!--Critical-->
+                <div class="row">
+                    <p class="col s12">
+                        <input type="checkbox" id="criticalField"/>
+                        <label for="criticalField">Critical</label>
+                    </p>
+                </div>
+                <!--Expiry-->
+                <div class="row" id="expiryRow">
+                    <p class="col s12">
+                        <label for="expiryField">Expiry</label>
+                        <input type="date" class="datepicker" id="expiryField">
+                    </p>
+                </div>
+            </div>
+            <div class="card-action">
+                <a class="right" href="#">Post</a>
+                <a class="left" href="#">Cancel</a>
             </div>
         </div>
-        <!--To-->
-        <div class="row">
-            <div class="input-field col s12">
-                <label>To</label>
-                <select id="toField">
-                    <option value="" disabled selected>Choose your option</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                </select>
-            </div>
-        </div>
-        <!--Critical-->
-        <div class="row">
-            <div class="input-field col s12">
-                <input type="checkbox" id="criticalField" onclick=" provisionExpiry() "/>
-                <label for="criticalField">Critical</label>
-            </div>
-        </div>
-        <!--Expiry-->
-        <div class="row" id="expiryRow">
-            <div class="input-field col s12">
-                <input type="date" class="datepicker" id="expiryField">
-                <label for="expiryField">Expiry</label>
-            </div>
-        </div>
-        <!--Content-->
-        <div class="row">
-            <div class="input-field col s12">
-                <textarea id="contentField" class="materialize-textarea"></textarea>
-                <label for="contentField">Content</label>
-            </div>
-        </div>
+
+        
     </form>
+
     <script>
+        
+        // Event listeners
+        document.getElementById('criticalField').addEventListener('click', function(e) {
+            provisionExpiry();
+        });
+
+        // Plugin initialization
+        $(document).ready(function() {
+            $('select').material_select();
+        });
+
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15 // Creates a dropdown of 15 years to control year
+        });
+
+        // Helpers
         function provisionExpiry() {
             if (document.getElementById('criticalField').checked) {
-                document.getElementById('expiryRow').style.display = 'visible';
+                document.getElementById('expiryRow').style.display = 'block';
             } else {
                 document.getElementById('expiryRow').style.display = 'none';
             }
         }
+
     </script>
 </div>
