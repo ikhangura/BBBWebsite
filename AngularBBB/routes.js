@@ -41,6 +41,8 @@
     });
 
     app.controller('AppCtrl', ['$scope', '$cookies', function ($scope, $cookies) {
+        $scope.displayLoggedInOptions = false;
+
         $scope.$on('$routeChangeSuccess', function (event, data) {
             $scope.pageTitle = data.title;
         });
@@ -48,6 +50,15 @@
         $scope.logout = function () {
             $cookies.userData = "";
         }
+
+
+        $scope.$on('$viewContentLoaded', function () {
+            console.log("HERE");
+            if ($cookies.userData != "") {
+                console.log("Triggered as logged in");
+                $scope.displayLoggedInOptions = true;
+            }
+        })
     }]);
 
 }());

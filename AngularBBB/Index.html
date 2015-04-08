@@ -33,14 +33,18 @@
                     </ul>-->
                     <!--Tablet and Desktop nav-->
                     <ul class="right hide-on-med-and-down">
-                        <li><a href="#/contacts"><i class="mdi-social-group"></i></a></li>
-                        <li><a href="/#/newarticle"><i class="mdi-communication-message"></i></a></li>
+                        <span ng-show="displayLoggedInOptions">
+                            <li><a href="#!"><i class="mdi-social-group"></i></a></li>
+                            <li><a href="/#/newarticle"><i class="mdi-communication-message"></i></a></li>
+                        </span>
                         <li><a href="#!" ng-click="logout()"><i class="mdi-action-exit-to-app"></i></a></li>
                     </ul>
                     <!--Mobile nav-->
                     <ul id="slide-out" class="side-nav">
-                        <li><a href="#!">Contacts</a></li>
-                        <li><a href="/#/newarticle">Announce</a></li>
+                        <span ng-show="displayLoggedInOptions">
+                            <li><a href="#!">Contacts</a></li>
+                            <li><a href="/#/newarticle">Announce</a></li>
+                        </span>
                         <li><a href="#!" ng-click="logout()">Logout</a></li>
                     </ul>
                     <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
