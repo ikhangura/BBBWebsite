@@ -48,6 +48,15 @@
       display: none;
   }
 
+  #newarticleform.card.small {
+      height: 100%;
+  }
+
+  #newarticleform.card.small .card-content {
+      height: 100%;
+      margin-bottom: 30px;
+  }
+
 /* -- form customization -- */
 
   /* label color */
@@ -78,5 +87,3 @@
    .input-field .prefix.active {
      color: #2386AE;
    }
- 
-
