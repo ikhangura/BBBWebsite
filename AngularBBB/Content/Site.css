@@ -43,6 +43,11 @@
   .collection.with-header .collection-header {
     border-bottom: none;}
 
+
+     #expiryRow {
+      display: none;
+  }
+
 /* -- form customization -- */
 
   /* label color */
@@ -73,3 +78,5 @@
    .input-field .prefix.active {
      color: #2386AE;
    }
+ 
+

@@ -29,6 +29,11 @@
             controller: "articleController",
             title: "Article"
         })
+        .when("/newarticle", {
+            templateUrl: "/newarticle/newarticleView.html",
+            controller: "newarticleController",
+            title: "New Article"
+        })
         .otherwise({
             redirectTo: "/login"
         });
