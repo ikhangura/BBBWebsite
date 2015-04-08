@@ -21,8 +21,8 @@
             <div ng-repeat="article in newsfeed">
                 <div class="card small">
                     <div class="card-content">
-                        <a href="#/article/{{article.newsid}}" class="card-title truncate blue-text">{{article.title}}</a>
-                        <div class="card-subtitle ">{{article.author | uppercase}} - {{article.datetime}}</div>
+                        <a href="#/article/{{article.newsid}}" class="card-title truncate blue-text"><h4>{{article.title}}</h4></a>
+                        <div class="card-subtitle "><h6>{{article.author | uppercase}} - {{article.datetime}}</h6></div>
                         <p>
                             {{article.content}}
                         </p>
