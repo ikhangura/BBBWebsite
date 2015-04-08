@@ -18,6 +18,8 @@
                 $scope.displayNotice = true;
             });
 
+        
+
         var onSuccess = function (response) {
             console.log('Login - Successful Response From Server');
             saveDataToCookie(response.data.data);
