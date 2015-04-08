@@ -1,4 +1,118 @@
-﻿<div ng-controller="articleController">
-    <h3>{{newsid}}</h3>
+﻿<div id="top" class="row" ng-controller="articleController">
+    <div class="row" ng-show="!dataloaded">
+        <div style="width:70%; height:80%;position:absolute" class="valign-wrapper">
+            <div class="progress col s5 small-offset-2 valign">
+                <div class="indeterminate"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12" ng-show="dataloaded">
+        <!--Article Info section-->
+        <div class="section">
+            <div class="row">
+                <div class="col s12">
+                    <button class="btn waves-effect waves-light" style="background-color:#2386AE" ng-click="NavigateBack()">
+                        BACK                        
+                        <i class="mdi-navigation-chevron-left left"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-panel">
+                <div class="row">
+                    <div class="col s12">
+                        <h4 class="center-align">{{articletitle}}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <!--Article text row-->
+                        <div class="row">
+                            <div class="col s12">
+                                <p class="flow-text">{{articletext}}</p>
+                            </div>
+                        </div>
+                        <!--Article metadata row-->
+                        <div class="row">
+                            <div class="col s7">
+                                {{articleauthor}}
+                            </div>
+                            <div class="col s5 right-align">
+                                {{articledate}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Post new comments section-->
+        <div class="section">
+            <div class="card-panel">
+                <div class="row">
+                    <div class="col s12">
+                        <h5>Reply:</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <textarea class="materialize-textarea"
+                                  spellcheck="true"
+                                  placeholder="Comment..."
+                                  ng-model="newcommenttext"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6">
+                        {{postresponse}}
+                        <br/><!-- Need to reserve space when there is no text-->
+                    </div>
+                    <div class="col s6 small-offset-6 right-align">
+                        <button class="btn waves-effect waves-light" style="background-color:#2386AE" ng-click="PostNewComment()">
+                            POST
+                            <i class="mdi-content-send right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Comments section-->
+        <div class="section">
+            <div class="card-panel">
+                <div class="row">
+                    <div class="col s12">
+                        <h5>Comments:</h5>
+                    </div>
+                </div>
+                <!--Begin repeating for every comment-->
+                <div class="row">
+                    <div class="col s12" ng-repeat="(key,value) in comments" ng-class-odd="'cyan lighten-5'">
+                        <div class="row">
+                            <div class="col s12">
+                                {{value.content}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6">
+                                {{value.name}}
+                            </div>
+                            <div class="col s6 right-align">
+                                {{value.datetime}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End comment-->
+            </div>
+        </div>
+        <div class="section">
+            <div class="row">
+                <div class="col s12 center-align">
+                    <button class="btn waves-effect waves-light" style="background-color:#2386AE" ng-click="GoToTop()">
+                        TOP
+                        <i class="mdi-navigation-expand-less right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
    

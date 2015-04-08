@@ -1,11 +1,25 @@
 ﻿
+    <div class="row animate-show" style="background-color:#f28732" ng-show="displayNotice">
+
+
+        <div ng-show="displayNotice">
+            <div class="col s12 flow-text center-align" style="color:white">
+                Notice <br />
+                <div ng-repeat="notice in notices" ng-model="notices">
+                    {{notice.title}}
+                </div>
+            
+            </div>
+        </div>
+    </div>
     <div ng-show="!formLoading" class="animate-show">
         <h3>Login</h3>
     </div>
     <div class="row">
-        <div ng-show="formLoading" class="animate-show">
-            <img src="../img/loading-circle.gif" />
+        <div ng-show="formLoading" class="progress animate-show">
+            <div class="indeterminate"></div>
         </div>
+
         <div ng-show="!formLoading" class="animate-show">
             <form class="col s12" name="loginForm">
                 <div class="row">
@@ -25,7 +39,10 @@
                     Submit
                     <i class="mdi-content-send right"></i>
                 </button>
+                <div>
+                    <p style="color:red">{{errorMessage}}</p>
+                </div>
             </form>
         </div>
-        
+
     </div>
