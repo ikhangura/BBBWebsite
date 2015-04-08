@@ -6,8 +6,8 @@
                 <input type="text" ng-model="txtsearch" />
             </div>
             <div class="col s5">
-                <a class="waves-effect waves-light btn" ng-click="FilterContacts()"><i class="mdi-action-search right"></i>Search</a>
-                <a class="waves-effect waves-light btn" ng-click="ResetContacts()">Reset</a>
+                <a class="waves-effect waves-light btn" style="background-color:#2386AE" ng-click="FilterContacts()"><i class="mdi-action-search right"></i>Search</a>
+                <a class="waves-effect waves-light btn" style="background-color:#2386AE" ng-click="ResetContacts()">Reset</a>
             </div>
         </div>
         <!--End search bar row-->
@@ -16,7 +16,7 @@
             <div class="col s8 offset-s3">
                 <div class="card-panel">
                     <div class="collection" ng-repeat="(key, value) in contactdata" ng-click="LoadSingleContact(value.userid)">
-                        <a href="" class="collection-item">{{value.name}}</a>
+                        <a href="" class="collection-item" style="color:#2386AE">{{value.name}}</a>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col s12">
                     <div class="center-align">
-                        <a class="waves-effect waves-light btn" ng-click="ShowContactList()"><i class="mdi-navigation-close right"></i>Close</a>
+                        <a class="waves-effect waves-light btn" style="background-color:#2386AE" ng-click="ShowContactList()"><i class="mdi-navigation-close right"></i>Close</a>
                     </div>
                 </div>
             </div>
