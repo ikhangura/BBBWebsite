@@ -1,1 +1,144 @@
-﻿<h3> This is the Contacts View</h3>
+﻿<div id="top" class="row" ng-controller="contactsController">
+    <!--<div class="row" ng-show="!singlecontactselected">-->
+    <div class="row">
+        <!--Begin search bar row-->
+        <div class="row">
+            <div class="col s4 offset-s3">
+                <input type="text" ng-model="txtsearch" />
+            </div>
+            <div class="col s3">
+                <a class="waves-effect waves-light btn" ng-click="FilterContacts()"><i class="mdi-action-search right"></i>Search</a>
+            </div>
+        </div>
+        <!--End search bar row-->
+        <!--Begin list of contacts section-->
+        <div class="row">
+            <div class="col s7 offset-s3">
+                <div class="card-panel">
+                    <div class="collection" ng-repeat="(key, value) in contactdata" ng-click="LoadSingleContact(value.userid)">
+                        <a href="" class="collection-item">{{value.name}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End list of contacts section-->
+    </div>
+    <!--Begin single contact info section-->
+    <!--<div class="row" ngshow="singlecontactselected">-->
+    <div class="row" ngshow="singlecontactselected">
+        <!--Begin name, department, position section-->
+        <div class="section">
+            <div class="row">
+                <div class="col s12">
+                    <div class="row">
+                        <div class="col s12">
+                            {{scname}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            {{scdept}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            {{scposition}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End name, department, position section-->
+        <!--Begin email work office section-->
+        <div class="section">
+            <div class="row">
+                <div class="col s12">
+                    <div class="row">
+                        <div class="col s12">
+                            Email
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            {{scemail}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            Work
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            {{scphone}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            Office
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            {{scofficelocation}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End email work office section-->
+        <div class="section">
+            <div class="row">
+                <div class="col s12">
+                    Hours
+                </div>
+            </div>
+            <!--Monday-->
+            <div class="row">
+                <div class="col s5">
+                    Mon
+                </div>
+                <div class="col s7">
+                    {{scmon}}
+                </div>
+            </div>
+            <!--Tuesday-->
+            <div class="row">
+                <div class="col s5">
+                    Tue
+                </div>
+                <div class="col s7">
+                    {{sctue}}
+                </div>
+            </div>
+            <!--Wednesday-->
+            <div class="row">
+                <div class="col s5">
+                    Wed
+                </div>
+                <div class="col s7">
+                    {{scwed}}
+                </div>
+            </div>
+            <!--Thursday-->
+            <div class="row">
+                <div class="col s5">
+                    Thu
+                </div>
+                <div class="col s7">
+                    {{scthu}}
+                </div>
+            </div>
+            <!--Friday-->
+            <div class="row">
+                <div class="col s5">
+                    Fri
+                </div>
+                <div class="col s7">
+                    {{scfri}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End single contact info section-->
+</div>
