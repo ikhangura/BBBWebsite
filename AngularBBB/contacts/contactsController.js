@@ -59,8 +59,30 @@
         };
 
         $scope.FilterContacts = function () {
-
+            if (typeof $scope.txtsearch == undefined || $scope.txtsearch.length <= 0) {
+                DisplayAllContactsFromCache();
+            } else {
+                var searchterm = $scope.txtsearch.toLowerCase();
+                var newlist = new Array();
+                for (var i = 0; i < allcontacts.length; i++) {
+                    if (allcontacts[i].name.toLowerCase().indexOf(searchterm) != -1) {
+                        newlist.push(angular.copy(allcontacts[i]));
+                    }
+                }
+                $scope.contactdata = newlist;
+            }
         };
+
+        $scope.ResetContacts = function () {
+            if (typeof $scope.txtsearch != undefined) {
+                $scope.txtsearch = '';
+            }            
+            DisplayAllContactsFromCache();
+        };
+
+        var DisplayAllContactsFromCache = function () {
+            $scope.contactdata = allcontacts;
+        }
 
         LoadAllContacts();
     }
