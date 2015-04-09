@@ -15,11 +15,6 @@
         var connection = $.hubConnection('http://api.thunderchicken.ca');
         var newsfeedHubProxy = connection.createHubProxy('newsfeedHub');
 
-        connection.start(function () {
-            console.log("SignalR - Calling Greeting");
-            newsfeedHubProxy.invoke("hello");
-        });
-
         newsfeedHubProxy.on('hello', function (message) {
             console.log(message);
         });
@@ -37,8 +32,18 @@
             } else {
                 console.log("Newsfeed - Client Is Not Viewing All News. Update Aborted");
             }
-            
+
         });
+
+
+        connection.start().done(function () {
+            console.log("SignalR - Calling Greeting");
+            newsfeedHubProxy.invoke("hello");
+        });
+
+        
+
+        
 
 
         console.log("Newsfeed - Initializing");
