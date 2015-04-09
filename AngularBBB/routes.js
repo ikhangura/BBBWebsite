@@ -52,19 +52,19 @@
 
         // route authorization
         $scope.$on('$locationChangeStart', function (event, data) {
-            var userData = JSON.parse($cookies.userData);
+            //var userData = JSON.parse($cookies.userData);
             var hashIndex = data.indexOf('#');
             var path = data.substr(hashIndex + 1);
 
             if (path != "/login") {
-                if ($cookies.userData == "") {
+                if ($cookies.userData == "" || $cookies.userData == null) {
                     console.log("Authorization - Unauthorized User Detected");
                     $location.path('/login');
                 }
             }
 
             if (path == "/newarticle") {
-                if (userData.type != "admin") {
+                if (JSON.parse($cookies.userData).type != "admin") {
                     console.log("Authorization - User Is Not An Admin");
                     $location.path('/newsfeed');
                 }
@@ -79,7 +79,7 @@
 
         //menu display authorization
         $scope.$on('$viewContentLoaded', function () {
-            if ($cookies.userData != "") {
+            if ($cookies.userData != "" && $cookies.userData != null) {
                 $scope.displayLoggedInOptions = true;
                 var userData = JSON.parse($cookies.userData);
                 if (userData.type == "admin" || userData.type == "Admin") {
