@@ -21,6 +21,7 @@
     <link rel="icon" type="image/png" href="/icons/favicon-16x16.png" sizes="16x16">
     <link rel="manifest" href="/icons/manifest.json">
     <link rel="shortcut icon" href="/icons/favicon.ico">
+
     <meta name="msapplication-TileColor" content="#2fb4e9">
     <meta name="msapplication-TileImage" content="/icons/mstile-144x144.png">
     <meta name="msapplication-config" content="/icons/browserconfig.xml">
@@ -57,7 +58,9 @@
                     <ul class="right hide-on-med-and-down">
                         <span ng-show="displayLoggedInOptions">
                             <li><a href="/#/newsfeed"><i class="mdi-action-assignment"></i></a></li>
-                            <li><a href="/#/newarticle"><i class="mdi-editor-mode-edit"></i></a></li>
+                            <span ng-show="displayPostArticle">
+                                <li><a href="/#/newarticle"><i class="mdi-editor-mode-edit"></i></a></li>
+                            </span>
                             <li><a href="#/contacts"><i class="mdi-social-group"></i></a></li>
                         </span>
                         <li><a href="#!" ng-click="logout()"><i class="mdi-action-exit-to-app"></i></a></li>
