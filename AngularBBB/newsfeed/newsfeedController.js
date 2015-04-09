@@ -7,6 +7,40 @@
         $scope.newsfeedLoading = true;
         $scope.menuLoading = true;
         $scope.transition = true;
+
+        var AllNewsSet = true;
+
+        console.log("Newsfeed - SignalR Initialization");
+
+        var connection = $.hubConnection('http://api.thunderchicken.ca');
+        var newsfeedHubProxy = connection.createHubProxy('newsfeedHub');
+
+        connection.start(function () {
+            console.log("SignalR - Calling Greeting");
+            newsfeedHubProxy.invoke("hello");
+        });
+
+        newsfeedHubProxy.on('hello', function (message) {
+            console.log(message);
+        });
+
+        newsfeedHubProxy.on("newNews", function () {
+            console.log("Newsfeed - Update Request Recieved From Server");
+            if (AllNewsSet) {
+                console.log("Newsfeed - Client Detected Viewing All News. Now Updating");
+                $http.get("http://api.thunderchicken.ca/api/newsfeed/" + userid + "/standard/" + token)
+                    .success(function (response) {
+                        console.log("Newsfeed - Successfuly Updated News From Server");
+                        $scope.newsfeed = response.data.news;
+
+                    });
+            } else {
+                console.log("Newsfeed - Client Is Not Viewing All News. Update Aborted");
+            }
+            
+        });
+
+
         console.log("Newsfeed - Initializing");
 
 
@@ -35,6 +69,7 @@
 
         var onFailure = function (response) {
             console.log("Newsfeed - Failure Response From Server / Error In Sending For Newsfeed");
+            alert("There was an Error Loading the Newsfeed. Please Refresh the Page or Re-Login");
             //alert(JSON.stringify(response));
             $scope.newsfeedLoading = false;
         }
@@ -55,16 +90,19 @@
         var onMenuFailure = function (response) {
             console.log("Newsfeed - Failure Response From Server / Error In Sending For Menu");
             $scope.menuLoading = false;
+            alert("There was an Error Loading the Newsfeed Menu. Please Refresh the Page or Re-Login");
         }
 
 
         $scope.getCourseSpecific = function(coursesectionid){
             //alert(coursesectionid);
             if (coursesectionid == 'all') {
+                AllNewsSet = true;
                 // call default news fetch
                 $http.get("http://api.thunderchicken.ca/api/newsfeed/" + userid + "/standard/" + token)
                     .then(onSuccess, onFailure);
             } else {
+                AllNewsSet = false;
                 $http.get("http://api.thunderchicken.ca/api/newsfeed/" + userid + "/coursesection/" + coursesectionid + "/" + token)
                     .then(onSuccess, onFailure);
             }
