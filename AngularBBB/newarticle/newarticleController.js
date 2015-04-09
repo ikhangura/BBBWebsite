@@ -2,7 +2,7 @@
 
     var app = angular.module("myApp");
 
-    var newarticleController = function($scope, $http, $cookie, $location) {
+    var newarticleController = function($scope, $http, $cookie, $location, $window) {
         //interactive functionality code goes here
         $scope.formLoading = false;
         console.log("New Article - Initializing");
@@ -19,18 +19,37 @@
         var articlePriority;
         var articleContent;
 
+        // Setup sidemenu
+        $scope.username = userData.name;
+        var onMenuSuccess = function (response) {
+            console.log("Newsfeed - Success Response From Server For Menu");
+            $scope.programname = response.data.data.programname;
+
+            courses = response.data.data.courses;
+            var coursesArray = response.data.data.courses;
+            var allOption = coursesArray.pop(); //remove the last element
+            $scope.all = allOption.coursesectionid;
+            $scope.courses = coursesArray;
+
+            $scope.menuLoading = false;
+        }
+        var onMenuFailure = function (response) {
+            console.log("Newsfeed - Failure Response From Server / Error In Sending For Menu");
+            $scope.menuLoading = false;
+            alert("There was an Error Loading the Newsfeed Menu. Please Refresh the Page or Re-Login");
+        }
+        // get course data
+        $http.get("http://api.thunderchicken.ca/api/mycourses/" + userid + "/" + token)
+            .then(onMenuSuccess, onMenuFailure);
+
         console.log("New Article - Successfuly Pulled Cookie Data");
 
         var onSuccess = function(response) {
             console.log("New Article - Successful Response From Server");
             console.log(JSON.stringify(response));
             localresponse = response;
-            $scope.contactlist = response.data.data.coursesections;
-            for (var i = 0; i < response.data.data.coursesections.length; i++) {
-                if (response.data.data.coursesections[i].coursename == "ALL") {
-                    $scope.allcontact = response.data.data.coursesections[i].coursesectionid;
-                }
-            }
+            $scope.options = response.data.data.coursesections;
+
         }
 
         var onFailure = function(response) {
@@ -53,17 +72,17 @@
                         ];
                     } 
                 }
-                $scope.contactlist = allcontact;
-                console.log(allcontact);
+                $scope.options = allcontact;
+                $scope.recipientField = $scope.options[0];
             } else {
-                $scope.contactlist = localresponse.data.data.coursesections;
+                $scope.options = localresponse.data.data.coursesections;
             }
         }
 
         $scope.PostArticle = function () {
             var postarticleUrl = "http://api.thunderchicken.ca/" + "api/newsfeed/" + userid + "/article/" + token;
             articleTitle = $scope.titleField;
-            articleCourse = $scope.recipientField;
+            articleCourse = $scope.recipientField.coursesectionid;
             articleExpiry = $scope.expiryField;
             articlePriority = $scope.criticalField;
             articleContent = $scope.contentField;
@@ -99,7 +118,7 @@
                 $http.post(postarticleUrl, articlejson)
                     .success(function (response) {
                         console.log = response.message;
-                        window.location.replace("#/newsfeed");
+                        $window.location.href = "/#/newsfeed";
                     })
                     .error(function (response) {
                         console.log = response.message;
@@ -112,6 +131,6 @@
             .then(onSuccess, onFailure);
     }
 
-    app.controller("newarticleController", ["$scope", "$http", "$cookies", "$location", newarticleController]);
+    app.controller("newarticleController", ["$scope", "$http", "$cookies", "$location", "$window", newarticleController]);
 
 }());

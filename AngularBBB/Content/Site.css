@@ -100,3 +100,17 @@
    #recipientRow select {
        display: block;
    }
+
+   #newarticleform  .btn-flat {
+       height: inherit;
+       line-height: inherit;
+   }
+
+   #newarticleform button:focus {
+       background-color: transparent;
+       color: #ffd8a6 !important;
+   }
+
+   #newarticleform button:hover {
+       color: #ffd8a6 !important;
+   }
