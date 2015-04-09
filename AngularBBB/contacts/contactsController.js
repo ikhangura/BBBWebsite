@@ -15,6 +15,29 @@
         
         var allcontacts; // Stores all the contacts when initially received for searching through later
 
+        // Setup sidemenu
+        $scope.username = userInfo.name;
+        var onMenuSuccess = function (response) {
+            console.log("Newsfeed - Success Response From Server For Menu");
+            $scope.programname = response.data.data.programname;
+
+            courses = response.data.data.courses;
+            var coursesArray = response.data.data.courses;
+            var allOption = coursesArray.pop(); //remove the last element
+            $scope.all = allOption.coursesectionid;
+            $scope.courses = coursesArray;
+
+            $scope.menuLoading = false;
+        }
+        var onMenuFailure = function (response) {
+            console.log("Newsfeed - Failure Response From Server / Error In Sending For Menu");
+            $scope.menuLoading = false;
+            alert("There was an Error Loading the Newsfeed Menu. Please Refresh the Page or Re-Login");
+        }
+        // get course data
+        $http.get("http://api.thunderchicken.ca/api/mycourses/" + userid + "/" + token)
+            .then(onMenuSuccess, onMenuFailure);
+
         var LoadAllContacts = function () {
             $http.get(allcontactsURL)
             .success(function (response) {
