@@ -2,7 +2,7 @@
 
     var app = angular.module("myApp");
 
-    var newsfeedController = function ($scope, $http, $cookie) {
+    var newsfeedController = function ($scope, $http, $cookie, BASEURL) {
         //interactive functionality code goes here
         $scope.newsfeedLoading = true;
         $scope.menuLoading = true;
@@ -11,6 +11,7 @@
         var AllNewsSet = true;
 
         console.log("Newsfeed - SignalR Initialization");
+
 
         var connection = $.hubConnection('http://api.thunderchicken.ca');
         var newsfeedHubProxy = connection.createHubProxy('newsfeedHub');
@@ -23,7 +24,7 @@
             console.log("Newsfeed - Update Request Recieved From Server");
             if (AllNewsSet) {
                 console.log("Newsfeed - Client Detected Viewing All News. Now Updating");
-                $http.get("http://api.thunderchicken.ca/api/newsfeed/" + userid + "/standard/" + token)
+                $http.get(BASEURL + "/newsfeed/" + userid + "/standard/" + token)
                     .success(function (response) {
                         console.log("Newsfeed - Successfuly Updated News From Server");
                         $scope.newsfeed = response.data.news;
@@ -104,26 +105,26 @@
             if (coursesectionid == 'all') {
                 AllNewsSet = true;
                 // call default news fetch
-                $http.get("http://api.thunderchicken.ca/api/newsfeed/" + userid + "/standard/" + token)
+                $http.get(BASEURL + "/newsfeed/" + userid + "/standard/" + token)
                     .then(onSuccess, onFailure);
             } else {
                 AllNewsSet = false;
-                $http.get("http://api.thunderchicken.ca/api/newsfeed/" + userid + "/coursesection/" + coursesectionid + "/" + token)
+                $http.get(BASEURL + "/newsfeed/" + userid + "/coursesection/" + coursesectionid + "/" + token)
                     .then(onSuccess, onFailure);
             }
             
         }
 
         //get newsfeed data
-        $http.get("http://api.thunderchicken.ca/api/newsfeed/" + userid + "/standard/" + token)
+        $http.get(BASEURL + "/newsfeed/" + userid + "/standard/" + token)
             .then(onSuccess, onFailure);
 
         //get course data
-        $http.get("http://api.thunderchicken.ca/api/mycourses/" + userid + "/" + token)
+        $http.get(BASEURL + "/mycourses/" + userid + "/" + token)
             .then(onMenuSuccess, onMenuFailure);
 
 
     }
 
-    app.controller("newsfeedController", ["$scope", "$http", "$cookies", newsfeedController]);
+    app.controller("newsfeedController", ["$scope", "$http", "$cookies", "BASEURL", newsfeedController]);
 }());

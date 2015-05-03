@@ -2,7 +2,7 @@
 
     var app = angular.module("myApp");
 
-    var newarticleController = function($scope, $http, $cookie, $location, $window) {
+    var newarticleController = function($scope, $http, $cookie, $location, $window, BASEURL) {
         //interactive functionality code goes here
         $scope.formLoading = false;
         console.log("New Article - Initializing");
@@ -39,7 +39,7 @@
             alert("There was an Error Loading the Newsfeed Menu. Please Refresh the Page or Re-Login");
         }
         // get course data
-        $http.get("http://api.thunderchicken.ca/api/mycourses/" + userid + "/" + token)
+        $http.get(BASEURL + "/mycourses/" + userid + "/" + token)
             .then(onMenuSuccess, onMenuFailure);
 
         console.log("New Article - Successfuly Pulled Cookie Data");
@@ -80,7 +80,7 @@
         }
 
         $scope.PostArticle = function () {
-            var postarticleUrl = "http://api.thunderchicken.ca/" + "api/newsfeed/" + userid + "/article/" + token;
+            var postarticleUrl = BASEURL + "/newsfeed/" + userid + "/article/" + token;
             articleTitle = $scope.titleField;
             articleCourse = $scope.recipientField.coursesectionid;
             articleExpiry = $scope.expiryField;
@@ -131,6 +131,6 @@
             .then(onSuccess, onFailure);
     }
 
-    app.controller("newarticleController", ["$scope", "$http", "$cookies", "$location", "$window", newarticleController]);
+    app.controller("newarticleController", ["$scope", "$http", "$cookies", "$location", "$window", "BASEURL", newarticleController]);
 
 }());

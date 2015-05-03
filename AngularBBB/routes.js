@@ -2,6 +2,8 @@
 
     var app = angular.module("myApp", ["ngRoute", "ngCookies", "ngAnimate"]);
 
+    app.constant('BASEURL', "http://api.thunderchicken.ca/api");
+
     app.config(function ($routeProvider) {
         $routeProvider
           .when("/login", {

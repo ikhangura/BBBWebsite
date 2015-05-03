@@ -2,14 +2,14 @@
 
     var app = angular.module("myApp");
 
-    var contactsController = function ($scope, $http, $cookie, $location, $anchorScroll, $routeParams) {
+    var contactsController = function ($scope, $http, $cookie, $location, $anchorScroll, $routeParams, BASEURL) {
 
         var userInfo = JSON.parse($cookie.userData);
         var token = userInfo.token;
         var usertype = userInfo.type;
         var userid = userInfo.userid;
         var userrealname = userInfo.name;
-        var baseURL = "http://api.thunderchicken.ca/api/";
+        var baseURL = BASEURL + "/";
         var allcontactsURL = baseURL + "contacts/" + userid + "/" + token;
         var basesinglecontactURL = baseURL + "contacts/" + userid + "/single/";
         
@@ -116,5 +116,5 @@
         LoadAllContacts();
     }
 
-    app.controller("contactsController", ["$scope", "$http", "$cookies", "$location", "$anchorScroll", "$routeParams", contactsController]);
+    app.controller("contactsController", ["$scope", "$http", "$cookies", "$location", "$anchorScroll", "$routeParams", "BASEURL",contactsController]);
 }());

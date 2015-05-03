@@ -2,7 +2,7 @@
 
     var app = angular.module("myApp");
 
-    var loginController = function ($scope, $http, $cookies, $location) {
+    var loginController = function ($scope, $http, $cookies, $location, BASEURL) {
         //interactive functionality code goes here
 
         console.log("Login - Initializing");
@@ -11,11 +11,14 @@
         $scope.formLoading = false;
         $scope.displayNotice = false;
 
-        $http.get("http://api.thunderchicken.ca/api/newsfeed/critical")
+        $http.get(BASEURL + "/newsfeed/critical")
             .success(function (response) {
                 console.log('Login - Loading Critical News Notices');
                 $scope.notices = response.data.criticalnews;
-                $scope.displayNotice = true;
+                if ($scope.notices.length > 0) {
+                    $scope.displayNotice = true;
+                }
+                
             });
 
         
@@ -54,7 +57,7 @@
                 console.log('Login - Attempting To Login');
                 $scope.formLoading = true;
                 var data = $scope.loginForm;
-                $http.post("http://api.thunderchicken.ca/api/auth", data)
+                $http.post(BASEURL + "/auth", data)
                     .then(onSuccess, onFailure);
             }
             
@@ -64,5 +67,5 @@
 
     }
 
-    app.controller("loginController", ["$scope", "$http", "$cookies", "$location",loginController]);
+    app.controller("loginController", ["$scope", "$http", "$cookies", "$location","BASEURL",loginController]);
 }());
