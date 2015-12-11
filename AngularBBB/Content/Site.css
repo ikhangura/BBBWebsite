@@ -62,6 +62,7 @@
   /* label color */
    .input-field label {
      color: #2386AE;
+       font-size: 0.8em;
    }
    /* label focus color */
    .input-field input[type=email]:focus + label {
@@ -86,4 +87,30 @@
    /* icon prefix focus color */
    .input-field .prefix.active {
      color: #2386AE;
+   }
+
+   #recipientRow .input-field {
+       margin-top: 2rem;
+   }
+
+   #recipientRow .input-field label {
+       top: -20px;
+   }
+
+   #recipientRow select {
+       display: block;
+   }
+
+   #newarticleform  .btn-flat {
+       height: inherit;
+       line-height: inherit;
+   }
+
+   #newarticleform button:focus {
+       background-color: transparent;
+       color: #ffd8a6 !important;
+   }
+
+   #newarticleform button:hover {
+       color: #ffd8a6 !important;
    }

@@ -16,50 +16,54 @@
                 <span class="card-title">New Article</span>
             </div>
             <div class="card-content">
+                
                 <!--Title-->
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="titleField" type="text" length="30">
+                        <input id="titleField" type="text" length="30" ng-model="titleField" required>
                         <label for="titleField">Title</label>
                     </div>
                 </div>
+
                 <!--To-->
-                <div class="row">
+                <div class="row" id="recipientRow">
                     <div class="input-field col s12">
-                        <select>
-                            <option value="" disabled selected>Choose your option</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
+                        <select ng-model="recipientField"
+                                ng-options="opt as opt.coursename for opt in options">
+                            <option style="display:none" value="">Select recipient</option>
                         </select>
-                        <label>To</label>
+                        <label>Recipient</label>
                     </div>
                 </div>
+
                 <!--Content-->
                 <div class="row">
                     <div class="input-field col s12">
-                        <textarea id="contentField" class="materialize-textarea"></textarea>
+                        <textarea id="contentField" class="materialize-textarea" ng-model="contentField" required></textarea>
                         <label for="contentField">Content</label>
                     </div>
                 </div>
+
                 <!--Critical-->
                 <div class="row">
                     <p class="col s12">
-                        <input type="checkbox" id="criticalField"/>
+                        <input type="checkbox" id="criticalField" ng-model="criticalField" ng-click="RecipientReload()" />
                         <label for="criticalField">Critical</label>
                     </p>
                 </div>
+
                 <!--Expiry-->
                 <div class="row" id="expiryRow">
                     <p class="col s12">
                         <label for="expiryField">Expiry</label>
-                        <input type="date" class="datepicker" id="expiryField">
+                        <input type="date" class="datepicker" id="expiryField" ng-model="expiryField">
                     </p>
                 </div>
+
             </div>
             <div class="card-action">
-                <a class="right" href="#">Post</a>
-                <a class="left" href="#">Cancel</a>
+                <a class="left" href="/#/newsfeed">Cancel</a>
+                <button class="right btn-flat orange-text accent-2-text" type="submit" ng-click="PostArticle()">Post</button>
             </div>
         </div>
 
@@ -74,23 +78,29 @@
         });
 
         // Plugin initialization
-        $(document).ready(function() {
-            $('select').material_select();
-        });
+//        $(document).ready(function() {
+//            $('select').material_select();
+//        });
 
         $('.datepicker').pickadate({
+            min: new Date(),
             selectMonths: true, // Creates a dropdown to control month
-            selectYears: 15 // Creates a dropdown of 15 years to control year
+            selectYears: 5
         });
 
         // Helpers
         function provisionExpiry() {
             if (document.getElementById('criticalField').checked) {
                 document.getElementById('expiryRow').style.display = 'block';
+                document.getElementById('expiryField').required = true;
             } else {
                 document.getElementById('expiryRow').style.display = 'none';
+                document.getElementById('expiryField').required = false;
+                document.getElementById('expiryField').dataset.value = "";
             }
         }
+
+
 
     </script>
 </div>

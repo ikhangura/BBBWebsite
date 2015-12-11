@@ -2,7 +2,7 @@
 
     var app = angular.module("myApp");
 
-    var articleController = function ($scope, $http, $cookie, $location, $anchorScroll, $routeParams) {
+    var articleController = function ($scope, $http, $cookie, $location, $anchorScroll, $routeParams, BASEURL) {
         //interactive functionality code goes here
 
         var newsid = $routeParams.newsid;
@@ -11,7 +11,7 @@
         var usertype = userInfo.type;
         var userid = userInfo.userid;
         var userrealname = userInfo.name;
-        var baseURL = "http://api.thunderchicken.ca/api/";
+        var baseURL = BASEURL + "/";
         var lastPage = document.referrer;
 
         var Load = function () {
@@ -68,5 +68,5 @@
         Load();
     }
 
-    app.controller("articleController", ["$scope", "$http", "$cookies", "$location", "$anchorScroll", "$routeParams", articleController]);
+    app.controller("articleController", ["$scope", "$http", "$cookies", "$location", "$anchorScroll", "$routeParams", "BASEURL",articleController]);
 }());

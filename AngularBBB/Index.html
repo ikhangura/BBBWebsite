@@ -1,8 +1,31 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html ng-app="myApp" ng-controller="AppCtrl" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>{{pageTitle}} | BCIT Blurb Board</title>
+
+    <!--Icons-->
+    <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/icons/favicon-194x194.png" sizes="194x194">
+    <link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/icons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/icons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/icons/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta name="msapplication-TileColor" content="#2fb4e9">
+    <meta name="msapplication-TileImage" content="/icons/mstile-144x144.png">
+    <meta name="msapplication-config" content="/icons/browserconfig.xml">
+    <meta name="theme-color" content="#2fb4e9">
 
     <!--CSS-->
     <link rel="stylesheet" type="text/css" href="Content/materialize.min.css">
@@ -23,7 +46,7 @@
                 <div class="col m1 l1"><span>&nbsp;</span></div>
                 <div class="col s12 m10 l10">
                     <!--Logo-->
-                    <a href="/" class="brand-logo">BCIT Blurb Board</a>
+                    <a href="/#/newsfeed" class="brand-logo">BCIT Blurb Board</a>
                     <!--Search-->
                     <!--<ul class="right hide-on-med-and-down">
                         <li class="input-field">
@@ -33,14 +56,22 @@
                     </ul>-->
                     <!--Tablet and Desktop nav-->
                     <ul class="right hide-on-med-and-down">
-                        <li><a href="#!"><i class="mdi-social-group"></i></a></li>
-                        <li><a href="/#/newarticle"><i class="mdi-communication-message"></i></a></li>
+                        <span ng-show="displayLoggedInOptions">
+                            <li><a href="/#/newsfeed"><i class="mdi-action-assignment"></i></a></li>
+                            <span ng-show="displayPostArticle">
+                                <li><a href="/#/newarticle"><i class="mdi-editor-mode-edit"></i></a></li>
+                            </span>
+                            <li><a href="#/contacts"><i class="mdi-social-group"></i></a></li>
+                        </span>
                         <li><a href="#!" ng-click="logout()"><i class="mdi-action-exit-to-app"></i></a></li>
                     </ul>
                     <!--Mobile nav-->
                     <ul id="slide-out" class="side-nav">
-                        <li><a href="#!">Contacts</a></li>
-                        <li><a href="/#/newarticle">Announce</a></li>
+                        <span ng-show="displayLoggedInOptions">
+                            <li><a href="/#/newsfeed">Newsfeed</a></li>
+                            <li><a href="/#/newarticle">New Article</a></li>
+                            <li><a href="#/contacts">Contacts</a></li>
+                        </span>
                         <li><a href="#!" ng-click="logout()">Logout</a></li>
                     </ul>
                     <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
@@ -66,6 +97,7 @@
 </html>
 
 <!-- Dependencies -->
+<script src="Scripts/jquery.signalR-2.2.0.js"></script>
 <script src="Scripts/angular.min.js"></script>
 <script src="Scripts/angular-route.min.js"></script>
 <script src="Scripts/angular-cookies.js"></script>

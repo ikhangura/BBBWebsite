@@ -2,6 +2,8 @@
 
     var app = angular.module("myApp", ["ngRoute", "ngCookies", "ngAnimate"]);
 
+    app.constant('BASEURL', "http://api.thunderchicken.ca/api");
+
     app.config(function ($routeProvider) {
         $routeProvider
           .when("/login", {
@@ -40,14 +42,56 @@
 
     });
 
-    app.controller('AppCtrl', ['$scope', '$cookies', function ($scope, $cookies) {
+    app.controller('AppCtrl', ['$scope', '$cookies', '$location', function ($scope, $cookies, $location) {
+        $scope.displayLoggedInOptions = false;
+        $scope.displayPostArticle = false;
+        
+
         $scope.$on('$routeChangeSuccess', function (event, data) {
             $scope.pageTitle = data.title;
+
         });
 
+        // route authorization
+        $scope.$on('$locationChangeStart', function (event, data) {
+            //var userData = JSON.parse($cookies.userData);
+            var hashIndex = data.indexOf('#');
+            var path = data.substr(hashIndex + 1);
+
+            if (path != "/login") {
+                if ($cookies.userData == "" || $cookies.userData == null) {
+                    console.log("Authorization - Unauthorized User Detected");
+                    $location.path('/login');
+                }
+            }
+
+            if (path == "/newarticle") {
+                if (JSON.parse($cookies.userData).type != "admin") {
+                    console.log("Authorization - User Is Not An Admin");
+                    $location.path('/newsfeed');
+                }
+            }
+        });
+
+        //logout functionality
         $scope.logout = function () {
+            console.log("Authorization - User Logged Out / Cookie Cleared");
             $cookies.userData = "";
         }
+
+        //menu display authorization
+        $scope.$on('$viewContentLoaded', function () {
+            if ($cookies.userData != "" && $cookies.userData != null) {
+                $scope.displayLoggedInOptions = true;
+                var userData = JSON.parse($cookies.userData);
+                if (userData.type == "admin" || userData.type == "Admin") {
+                    $scope.displayPostArticle = true;
+                }
+            } else {
+                $scope.displayLoggedInOptions = false;
+                $scope.displayPostArticle = false;
+            }
+        });
     }]);
 
 }());
